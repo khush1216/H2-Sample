@@ -31,22 +31,24 @@ import com.javaProject.internalDB.model.Person;
 @Configuration
 @EnableBatchProcessing
 public class RunBatchJobsConfig {
+	
+	@Autowired
+    JobListenersBefAfter interceptingJob;
      
     @Autowired
-    private JobBuilderFactory jobBuilderFactory;
+    private JobBuilderFactory jobBuildFact;
  
     @Autowired
-    private StepBuilderFactory stepBuilderFactory;
+    private StepBuilderFactory stepBuildFact;
  
     @Value("classPath:/input/ms3Interview_orig.csv")
-    private Resource inputResource;
+    private Resource inputFileCsv;
     
-    @Autowired
-    JobListenersBefAfter interceptingJob;
+    
  
     @Bean
     public Job readCSVFileJob() {
-        return jobBuilderFactory
+        return jobBuildFact
                 .get("readCSVFileJob")
                 .incrementer(new RunIdIncrementer())
                 .start(step()).listener(interceptingJob)
@@ -55,10 +57,10 @@ public class RunBatchJobsConfig {
  
     @Bean
     public Step step() {
-        return stepBuilderFactory
+        return stepBuildFact
                 .get("step")
                 .<Person, Person>chunk(20)
-                .reader(reader())
+                .reader(flatFilereader())
                 .processor(processor())
                 .writer(writer())
                 .build();
@@ -70,11 +72,11 @@ public class RunBatchJobsConfig {
     }
      
     @Bean
-    public FlatFileItemReader<Person> reader() {
+    public FlatFileItemReader<Person> flatFilereader() {
         FlatFileItemReader<Person> itemReader = new FlatFileItemReader<Person>();
         itemReader.setLineMapper(lineMapper());
         itemReader.setLinesToSkip(1);
-        itemReader.setResource(inputResource);
+        itemReader.setResource(inputFileCsv);
         return itemReader;
     }
  

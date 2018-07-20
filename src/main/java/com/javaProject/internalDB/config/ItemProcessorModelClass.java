@@ -17,7 +17,6 @@ public class ItemProcessorModelClass implements ItemProcessor<Person, Person>
     {
     	InsertCSVApplication.receivedRecords ++;
     	if(employee.isAnyFieldNull()) {
-    		
     		InsertCSVApplication.badRecords ++;
     		System.out.println("Not inserting employee : " + employee);
     		writeToBadDataFile(employee);

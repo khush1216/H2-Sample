@@ -17,8 +17,8 @@ public class JobListenersBefAfter implements JobExecutionListener{
 	        System.out.println("STARTING INSERTION OF RECORDS!");
 	    }
 	 
-	    public void afterJob(JobExecution jobExecution) {
-	        System.out.println("Insertion Completed");
+	 public void afterJob(JobExecution jobExecution) {
+	        System.out.println("Insertion Completed!");
 	        
 	        try {
 	        	BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(".\\logFile.txt"), "UTF-8"));

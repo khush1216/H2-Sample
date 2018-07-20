@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class JobController {
 	
 	@Autowired
-    JobLauncher jobLauncher;
+    JobLauncher launcher;
       
     @Autowired
     Job job;
@@ -21,10 +21,10 @@ public class JobController {
     @RequestMapping("/insertCSV")
     public String startJob() throws Exception {
     	
-    	JobParameters params = new JobParametersBuilder()
+    	JobParameters parameters = new JobParametersBuilder()
               .addString("JobID", String.valueOf(System.currentTimeMillis()))
               .toJobParameters();
-      jobLauncher.run(job, params);
+    	launcher.run(job, parameters);
       
       return "Job Launched!";
     	

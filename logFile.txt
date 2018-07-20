@@ -1,0 +1,3 @@
+Total Received Records : 6001
+Total Successful Insertions : 4870
+Total Failed Insertions : 1131

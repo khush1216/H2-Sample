@@ -16,7 +16,6 @@ public class InsertCSVApplication
     	badDataTimestamp = System.currentTimeMillis();
         SpringApplication.run(InsertCSVApplication.class, args);
         
-        System.out.println("After application has printed the records!");
     }
     
       

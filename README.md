@@ -14,3 +14,5 @@
 
 Please contact me if you face any issues while running the application.
 	
+References to build the application:
+Java Documentation, H2 documentation, Spring Batch documentation.
